@@ -26,7 +26,7 @@ class RVAdapter (val itemList : List<Questions>) : RecyclerView.Adapter<RVAdapte
 
         holder.itemView.apply {
             for(i in itemList) {
-                tvItem.text = items.title + "\n " + items.author
+                tvItem.text = items.title + "\n " + items.name
             }
         }
     }

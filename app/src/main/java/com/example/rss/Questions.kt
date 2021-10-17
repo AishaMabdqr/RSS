@@ -4,7 +4,7 @@ import android.util.Xml
 import org.xmlpull.v1.XmlPullParser
 import java.io.InputStream
 
-data class Questions (val title : String?, val author:String?){
+data class Questions (val title : String?, val name:String?){
     override fun toString(): String = title!!
 }
 
@@ -46,7 +46,6 @@ class XMLParser{
                     when (parser.name) {
                         "title" -> title = readTitle(parser)
                         "author" -> {
-                             if (parser.name == "author" ){
                                  parser.require(XmlPullParser.START_TAG, ns, "author")
                                   while (parser.next() != XmlPullParser.END_TAG) {
                                 if (parser.eventType != XmlPullParser.START_TAG) {
@@ -54,9 +53,10 @@ class XMLParser{
                                 }
                                 when (parser.name){
                                     "name" -> name = readName(parser)
+                                    else -> skip(parser)
                                 }
                             }
-                        }}
+                        }
                         else -> skip(parser)
                     }
                 }
